@@ -1,0 +1,82 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+[application]
+
+config/name="Custom OST-to-BeardLib Tool"
+config/description="A tool for PAYDAY 2 modders that allows you to port Custom OST tracks with one click."
+run/main_scene="res://scenes/main.tscn"
+run/low_processor_mode=true
+boot_splash/bg_color=Color( 0.12549, 0.145098, 0.192157, 1 )
+config/icon="res://icon.png"
+
+[debug]
+
+gdscript/warnings/unused_class_variable=true
+gdscript/warnings/narrowing_conversion=false
+gdscript/warnings/incompatible_ternary=false
+gdscript/warnings/return_value_discarded=false
+gdscript/warnings/unsafe_cast=true
+gdscript/warnings/unsafe_call_argument=true
+
+[display]
+
+window/size/width=640
+window/size/height=480
+window/stretch/mode="2d"
+window/stretch/aspect="keep"
+
+[filesystem]
+
+import/fbx/use_fbx=false
+
+[gui]
+
+common/drop_mouse_on_gui_input_disabled=true
+
+[physics]
+
+common/enable_pause_aware_picking=true
+3d/physics_engine="GodotPhysics"
+3d/active_soft_world=false
+
+[rendering]
+
+quality/driver/driver_name="GLES2"
+quality/intended_usage/framebuffer_allocation=1
+quality/intended_usage/framebuffer_allocation.mobile=1
+vram_compression/import_etc2=false
+quality/directional_shadow/size=256
+quality/directional_shadow/size.mobile=256
+quality/shadow_atlas/size=256
+quality/shadow_atlas/size.mobile=256
+quality/shadow_atlas/cubemap_size=64
+quality/shadow_atlas/quadrant_0_subdiv=0
+quality/shadow_atlas/quadrant_1_subdiv=0
+quality/shadow_atlas/quadrant_2_subdiv=0
+quality/shadow_atlas/quadrant_3_subdiv=0
+quality/shadows/filter_mode=0
+quality/reflections/texture_array_reflections=false
+quality/reflections/high_quality_ggx=false
+quality/reflections/irradiance_max_size=32
+quality/shading/force_vertex_shading=true
+quality/shading/force_lambert_over_burley=true
+quality/shading/force_blinn_over_ggx=true
+quality/filters/anisotropic_filter_level=1
+gles2/compatibility/disable_half_float=true
+quality/lightmapping/use_bicubic_sampling=false
+environment/default_clear_color=Color( 0.137255, 0.14902, 0.180392, 1 )
+cpu_lightmapper/quality/low_quality_ray_count=0
+cpu_lightmapper/quality/medium_quality_ray_count=0
+cpu_lightmapper/quality/high_quality_ray_count=0
+cpu_lightmapper/quality/ultra_quality_ray_count=0
+quality/reflections/atlas_size=0
+quality/reflections/atlas_subdiv=0
+quality/depth/hdr=false

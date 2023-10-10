@@ -1,0 +1,141 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scripts/main.gd" type="Script" id=1]
+[ext_resource path="res://sprites/payday_2_logo.png" type="Texture" id=2]
+[ext_resource path="res://sprites/music_symbol.png" type="Texture" id=3]
+
+[node name="Application" type="CanvasLayer"]
+script = ExtResource( 1 )
+
+[node name="Node" type="Node" parent="."]
+
+[node name="GameTitle" type="TextureRect" parent="Node"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -160.0
+margin_top = 10.0
+margin_right = 160.0
+margin_bottom = 63.5
+rect_min_size = Vector2( 320, 53.5 )
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 5
+
+[node name="MusicSymbolLeft" type="TextureRect" parent="Node"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -190.0
+margin_top = 20.0
+margin_right = -158.0
+margin_bottom = 52.0
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+
+[node name="MusicSymbolRight" type="TextureRect" parent="Node"]
+self_modulate = Color( 1, 1, 0.588235, 1 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 158.0
+margin_top = 20.0
+margin_right = 190.0
+margin_bottom = 52.0
+texture = ExtResource( 3 )
+expand = true
+stretch_mode = 6
+
+[node name="TrackSelection" type="Label" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -57.0
+margin_bottom = -43.0
+text = "No track selected."
+align = 1
+valign = 1
+clip_text = true
+
+[node name="Buttons" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.0
+margin_top = -27.0
+margin_right = 100.0
+margin_bottom = 27.0
+alignment = 2
+
+[node name="SelectTrackData" type="Button" parent="Buttons"]
+margin_right = 200.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 200, 25 )
+text = "Browse for Track Data"
+
+[node name="ConvertTrack" type="Button" parent="Buttons"]
+margin_top = 29.0
+margin_right = 200.0
+margin_bottom = 54.0
+rect_min_size = Vector2( 200, 25 )
+disabled = true
+text = "Convert Track"
+
+[node name="Settings" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -120.0
+margin_top = 31.0
+margin_right = 120.0
+margin_bottom = 111.0
+custom_constants/separation = 0
+
+[node name="IgnoreVolumeParams" type="CheckButton" parent="Settings"]
+margin_right = 240.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 210, 0 )
+hint_tooltip = "Disable this to prevent converting volume parameters."
+text = "Ignore Volume Params"
+
+[node name="OpenOutputOnConvert" type="CheckButton" parent="Settings"]
+margin_top = 40.0
+margin_right = 240.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 210, 0 )
+pressed = true
+text = "Open Output On Convert"
+align = 2
+
+[node name="Dialogs" type="Node" parent="."]
+
+[node name="OpenTrack" type="FileDialog" parent="Dialogs"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -240.0
+margin_top = -150.0
+margin_right = 240.0
+margin_bottom = 150.0
+window_title = "Open a File"
+mode = 0
+access = 2
+filters = PoolStringArray( "track.*" )
+show_hidden_files = true
+
+[node name="Alert" type="AcceptDialog" parent="Dialogs"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -120.0
+margin_top = -40.0
+margin_right = 120.0
+margin_bottom = 40.0
+window_title = "Error"
+dialog_autowrap = true
+
+[connection signal="pressed" from="Buttons/SelectTrackData" to="." method="_on_select_track_data_pressed"]
+[connection signal="pressed" from="Buttons/ConvertTrack" to="." method="_on_convert_track_pressed"]
+[connection signal="file_selected" from="Dialogs/OpenTrack" to="." method="_on_file_selected"]
