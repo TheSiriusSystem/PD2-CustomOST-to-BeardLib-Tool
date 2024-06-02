@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://bs2jnurahgg2e"]
+
+[ext_resource type="Texture2D" uid="uid://cr8xt0mqf12sr" path="res://assets/textures/ui/icons/open_folder.png" id="1_l37nb"]
+
+[node name="LocationSetting" type="HBoxContainer"]
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+
+[node name="Path" type="LineEdit" parent="."]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+editable = false
+
+[node name="Browse" type="Button" parent="."]
+custom_minimum_size = Vector2(31, 0)
+layout_mode = 2
+icon = ExtResource("1_l37nb")
+icon_alignment = 1
+expand_icon = true

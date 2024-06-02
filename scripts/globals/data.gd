@@ -9,6 +9,9 @@ const RECOGNIZED_SELF_CONTAINED_MODE_FILE_NAMES: PackedStringArray = [
 
 var settings: Dictionary = Constants.DEFAULT_SETTINGS.duplicate(true)
 var settings_file_path: String = "user://"
+var removed_sections: int = 0
+var removed_section_keys: int = 0
+var invalid_section_keys: int = 0
 
 var _config: ConfigFile = ConfigFile.new()
 
@@ -41,13 +44,13 @@ func _ready() -> void:
 						if typeof(value) == value_type:
 							section_keys[key] = value
 						else:
-							push_warning("[settings/%s] Key \"%s\" is not of type %s" % [section, key, value_type])
+							invalid_section_keys += 1
 					else:
 						_config.set_value(section, key, null)
-						push_warning("[settings/%s] Unknown key \"%s\"" % [section, key])
+						removed_section_keys += 1
 			else:
 				_config.erase_section(section)
-				push_warning("[settings] Unknown section \"%s\"" % section)
+				removed_sections += 1
 
 
 func _notification(what: int) -> void:

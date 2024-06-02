@@ -1,0 +1,207 @@
+[gd_scene load_steps=10 format=3 uid="uid://ctgdqgo358uk3"]
+
+[ext_resource type="Script" path="res://scripts/application.gd" id="1_q31hd"]
+[ext_resource type="Texture2D" uid="uid://4a3g2ixk0rwa" path="res://assets/textures/ui/header/music_symbol.png" id="2_wgxo4"]
+[ext_resource type="Texture2D" uid="uid://bevafnmsdkwwx" path="res://assets/textures/ui/header/payday_2_logo.png" id="3_r3t1c"]
+[ext_resource type="Script" path="res://scripts/ui/settings_panel.gd" id="4_peftt"]
+[ext_resource type="Script" path="res://scripts/ui/console_panel.gd" id="5_g3ln1"]
+[ext_resource type="PackedScene" uid="uid://bf40psq2bn8j6" path="res://scenes/ui/settings_section_separator.tscn" id="5_jxn6j"]
+[ext_resource type="PackedScene" uid="uid://bs2jnurahgg2e" path="res://scenes/ui/settings_location_item.tscn" id="6_qgfif"]
+[ext_resource type="Script" path="res://scripts/ui/version_label.gd" id="6_vgf7w"]
+[ext_resource type="Script" path="res://scripts/ui/alert_dialog.gd" id="9_6kavc"]
+
+[node name="Application" type="CanvasLayer"]
+script = ExtResource("1_q31hd")
+
+[node name="Header" type="HBoxContainer" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -204.0
+offset_top = 20.0
+offset_right = 204.0
+offset_bottom = 73.0
+grow_horizontal = 2
+
+[node name="MusicSymbolLeft" type="TextureRect" parent="Header"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("2_wgxo4")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="GameLogo" type="TextureRect" parent="Header"]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+texture = ExtResource("3_r3t1c")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Version" type="Label" parent="Header/GameLogo"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -22.0
+offset_top = -3.0
+offset_right = 22.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Version %s"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("6_vgf7w")
+
+[node name="MusicSymbolRight" type="TextureRect" parent="Header"]
+self_modulate = Color(1, 1, 0.588235, 1)
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture = ExtResource("2_wgxo4")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Console" type="VBoxContainer" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -340.0
+offset_top = -148.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="Console"]
+layout_mode = 2
+text = "Console"
+horizontal_alignment = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Console"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Console/PanelContainer"]
+layout_mode = 2
+script = ExtResource("5_g3ln1")
+
+[node name="Label1" type="Label" parent="Console/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Label2" type="Label" parent="Console/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Label3" type="Label" parent="Console/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Label4" type="Label" parent="Console/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Label5" type="Label" parent="Console/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Label6" type="Label" parent="Console/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Label7" type="Label" parent="Console/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="Settings" type="PanelContainer" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -20.0
+offset_right = 82.0
+offset_bottom = -20.0
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings" node_paths=PackedStringArray("_dialog_location")]
+layout_mode = 2
+theme_override_constants/separation = 0
+script = ExtResource("4_peftt")
+_dialog_location = NodePath("../../Dialogs")
+_section_separator_scene = ExtResource("5_jxn6j")
+_location_item_scene = ExtResource("6_qgfif")
+
+[node name="Buttons" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -33.0
+offset_right = 100.0
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="ConvertTrack" type="Button" parent="Buttons"]
+custom_minimum_size = Vector2(200, 25)
+layout_mode = 2
+text = "Convert a Track"
+
+[node name="OpenOutput" type="Button" parent="Buttons"]
+custom_minimum_size = Vector2(200, 25)
+layout_mode = 2
+text = "Open Output Folder"
+
+[node name="Dialogs" type="Node" parent="."]
+
+[node name="OpenTrackDefinition" type="FileDialog" parent="Dialogs"]
+title = "Select a Track Definition"
+size = Vector2i(480, 300)
+ok_button_text = "Open"
+mode_overrides_title = false
+file_mode = 0
+access = 2
+filters = PackedStringArray("track.txt", "track.json")
+show_hidden_files = true
+
+[node name="Alert" type="AcceptDialog" parent="Dialogs"]
+size = Vector2i(148, 100)
+script = ExtResource("9_6kavc")
+
+[node name="Label" type="Label" parent="Dialogs/Alert"]
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 8.0
+offset_top = -42.0
+offset_right = -8.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_alignment = 1
+
+[connection signal="pressed" from="Buttons/ConvertTrack" to="Dialogs/OpenTrackDefinition" method="popup_centered"]
+[connection signal="pressed" from="Buttons/OpenOutput" to="." method="_on_open_output_pressed"]
+[connection signal="file_selected" from="Dialogs/OpenTrackDefinition" to="." method="_on_track_definition_selected"]

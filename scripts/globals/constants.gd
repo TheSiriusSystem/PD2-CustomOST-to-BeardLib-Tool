@@ -3,9 +3,9 @@ extends Object
 ## Stores globally-accessible enums and constants.
 
 
-enum AlertType
+enum MessageType
 {
-	SUCCESS,
+	NOTICE,
 	WARNING,
 	ERROR,
 }

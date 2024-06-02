@@ -14,6 +14,7 @@ config/name="Custom OST-to-BeardLib Tool"
 config/description="A tool for PAYDAY 2 modders that allows you to port Custom OST tracks with one click."
 config/version="1.1.0"
 config/tags=PackedStringArray("application")
+run/main_scene="res://scenes/application.tscn"
 config/features=PackedStringArray("4.2")
 run/low_processor_mode=true
 boot_splash/bg_color=Color(0.12549, 0.145098, 0.192157, 1)
