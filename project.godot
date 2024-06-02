@@ -22,6 +22,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Signals="*res://scripts/globals/signals.gd"
+Data="*res://scripts/globals/data.gd"
 
 [debug]
 
