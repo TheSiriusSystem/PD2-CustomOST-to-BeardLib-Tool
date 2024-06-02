@@ -1,0 +1,37 @@
+{
+    "id": "bloody_tears",
+    "volume": 1,
+    "name": "Bloody Tears",
+    "fade_duration": 1,
+    "events": {
+        "setup": {
+            "file": "setup.ogg",
+
+            "volume": 1,
+            "fade_in": 1,
+            "fade_out": 1
+        },
+        "control" : {
+            "start_file": "start_control.ogg",
+            "file": "control.ogg",
+
+            "volume": 1,
+            "fade_in": 0,
+            "fade_out": 1
+        },
+        "buildup": {
+            "file": "buildup.ogg",
+
+            "volume": 1,
+            "fade_in": 0,
+            "fade_out": 0
+        },
+        "assault" : {
+            "file": "assault.ogg",
+
+            "volume": 0.7,
+            "fade_in": 0,
+            "fade_out": 1
+        }
+    }
+}

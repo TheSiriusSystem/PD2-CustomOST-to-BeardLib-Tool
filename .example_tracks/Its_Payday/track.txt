@@ -1,0 +1,35 @@
+{
+    "id": "custom_ost_its_payday",
+    "volume": 0.8,
+    "name": "It's Payday",
+    "fade_duration": 1,
+    "events": {
+        "setup": {
+            "start_file": "start_setup.ogg",
+            "file": "setup.ogg",
+
+            "volume": 1
+        },
+        "control" : {
+            "start_file": "start_control.ogg",
+            "file": "control.ogg",
+
+            "volume": 1
+        },
+        "buildup": {
+            "file": "buildup.ogg",
+
+            "volume": 1,
+            "fade_in": 0.5,
+            "fade_out": 0
+        },
+        "assault" : {
+            "start_file": "start_assault.ogg",
+            "file": "assault.ogg",
+
+            "volume": 1,
+            "fade_in": 0,
+            "fade_out": 1
+        }
+    }
+}
