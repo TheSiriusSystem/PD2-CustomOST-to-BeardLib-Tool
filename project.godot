@@ -19,6 +19,10 @@ run/low_processor_mode=true
 boot_splash/bg_color=Color(0.12549, 0.145098, 0.192157, 1)
 config/icon="res://icon.svg"
 
+[autoload]
+
+Signals="*res://scripts/globals/signals.gd"
+
 [debug]
 
 gdscript/warnings/incompatible_ternary=false
