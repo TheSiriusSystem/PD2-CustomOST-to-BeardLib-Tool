@@ -109,16 +109,16 @@ func _on_track_definition_selected(path: String) -> void:
 	
 	var was_events_empty: bool = false
 	if not Utils.is_dict_key_valid(data, "events", TYPE_DICTIONARY):
+		Signals.print_to_console.emit(["Key \"events\" not found in track, initializing defaults"], Constants.MessageType.WARNING)
 		was_events_empty = true
 		data.events = {}
-		Signals.print_to_console.emit(["Key \"events\" not found in track, initializing defaults"], Constants.MessageType.WARNING)
 	for cost_event_name in TRACK_EVENT_MAP.keys():
 		if not Utils.is_dict_key_valid(data.events, cost_event_name, TYPE_DICTIONARY):
+			if not was_events_empty:
+				Signals.print_to_console.emit(["Key \"%s\" not found in track.events, initializing" % cost_event_name, "defaults"], Constants.MessageType.WARNING)
 			data.events[cost_event_name] = {
 				"file": "%s%s" % [cost_event_name, RECOGNIZED_TRACK_EXTENSIONS[1]]
 			}
-			if not was_events_empty:
-				Signals.print_to_console.emit(["Key \"%s\" not found in track.events, initializing" % cost_event_name, "defaults"], Constants.MessageType.WARNING)
 	
 	_ensure_output_structure()
 	_clear_dir(_get_output_path())
@@ -158,8 +158,8 @@ func _on_track_definition_selected(path: String) -> void:
 	}, "\t"))
 	file.close()
 	
-	var working_dir_path: String = path.get_base_dir()
-	var dir: DirAccess = DirAccess.open(working_dir_path)
+	var audio_dir_path: String = path.get_base_dir()
+	var dir: DirAccess = DirAccess.open(audio_dir_path)
 	if not dir:
 		Signals.show_alert.emit("Could not open working directory.\nCode: %s" % dir.get_open_error(), Constants.MessageType.ERROR)
 		return
@@ -168,7 +168,7 @@ func _on_track_definition_selected(path: String) -> void:
 	var file_name: String = dir.get_next()
 	while not file_name.is_empty():
 		if not dir.current_is_dir() and RECOGNIZED_TRACK_EXTENSIONS.has(file_name.get_extension()):
-			if dir.copy("%s/%s" % [working_dir_path, file_name], "%s/%s" % [_get_output_path(OUTPUT_SUBFOLDER_PATH_SOUNDS), file_name.get_file()]) != OK:
+			if dir.copy("%s/%s" % [audio_dir_path, file_name], "%s/%s" % [_get_output_path(OUTPUT_NESTED_PATH_SOUNDS), file_name.get_file()]) != OK:
 				failed_copies += 1
 		file_name = dir.get_next()
 	dir.list_dir_end()
