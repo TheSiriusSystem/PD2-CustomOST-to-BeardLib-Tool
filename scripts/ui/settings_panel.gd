@@ -6,17 +6,16 @@ extends VBoxContainer
 @export var _section_separator_scene: PackedScene
 @export var _location_item_scene: PackedScene
 
-var _created_sections: int = 0
-
 
 func _ready() -> void:
+	var created_sections: int = 0
 	for section in Constants.DEFAULT_SETTINGS.keys():
 		var section_keys: Dictionary = Constants.DEFAULT_SETTINGS[section]
 		if section_keys.size() == 0:
 			continue
 		
 		var separator: VBoxContainer = _section_separator_scene.instantiate()
-		if _created_sections == 0:
+		if created_sections == 0:
 			separator.get_node("HSeparatorTop").visible = false
 		separator.get_node("Label").text = section.capitalize()
 		add_child(separator)
@@ -60,7 +59,7 @@ func _ready() -> void:
 						location_item.get_node("Browse").pressed.connect(dialog.popup_centered)
 						add_child(location_item)
 		
-		_created_sections += 1
+		created_sections += 1
 
 
 func _set_setting(section: String, key: String, value) -> void:
