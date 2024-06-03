@@ -102,10 +102,9 @@ func _on_track_definition_selected(path: String) -> void:
 	if typeof(data) != TYPE_DICTIONARY:
 		Signals.show_alert.emit("Selected file is not a valid JSON.", Constants.MessageType.ERROR)
 		return
-	
 	if not Utils.is_dict_key_valid(data, "id", TYPE_STRING):
-		data.id = path.get_base_dir().get_file()
-		Signals.print_to_console.emit(["Key \"id\" not found in track, inferring id to be the name", "of the folder it's in"], Constants.MessageType.WARNING)
+		Signals.show_alert.emit("Selected file does not have key \"id\".", Constants.MessageType.ERROR)
+		return
 	
 	var was_events_empty: bool = false
 	if not Utils.is_dict_key_valid(data, "events", TYPE_DICTIONARY):
