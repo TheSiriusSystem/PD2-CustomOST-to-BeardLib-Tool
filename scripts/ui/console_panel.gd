@@ -1,6 +1,9 @@
 extends VBoxContainer
-## A UI component that displays messages in a vertical list. The maximum amount of
-## messages is determined by how many children it has.
+## A UI component for displaying messages in a vertical list.
+##
+## A UI component for displaying messages in a vertical list. The amount of
+## messages displayed is determined by how many children it has. Only [Label]s
+## should be inserted into this control.
 
 
 var _current_messages: Array[Dictionary]

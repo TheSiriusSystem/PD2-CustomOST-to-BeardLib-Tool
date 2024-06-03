@@ -1,6 +1,9 @@
 extends VBoxContainer
-## A UI component that allows management of user settings.
-
+## A UI component for managing user settings.
+##
+## A UI component for managing user settings. Elements are created based on
+## sections and section keys in [constant Constants.DEFAULT_SETTINGS]. Only boolean
+## and path settings are supported, and empty sections are ignored.
 
 @export var _dialog_location: Node
 @export var _section_separator_scene: PackedScene
