@@ -24,42 +24,41 @@ func _ready() -> void:
 		for key in section_keys.keys():
 			var setting_name: String = key.capitalize()
 			
-			if typeof(section_keys[key]) == TYPE_BOOL:
-				var button: CheckButton = CheckButton.new()
-				button.text = setting_name
-				button.button_pressed = Data.settings[section][key]
-				button.pressed.connect(func() -> void:
-					_set_setting(section, key, button.button_pressed)
-				)
-				add_child(button)
-			elif typeof(section_keys[key]) == TYPE_STRING:
-				if key.ends_with("location"): # HACK: Assume that any section keys ending with "location" are path settings.
-					var location_item: HBoxContainer = _location_item_scene.instantiate()
-					
-					var dialog: FileDialog = FileDialog.new()
-					dialog.name = "Select%s" % setting_name.replace(" ", "")
-					dialog.access = FileDialog.ACCESS_FILESYSTEM
-					dialog.file_mode = FileDialog.FILE_MODE_OPEN_DIR
-					dialog.title = "Select a New %s" % setting_name
-					dialog.size = Vector2i(480, 300)
-					dialog.dir_selected.connect(func(dir: String) -> void:
-						Utils.set_node_properties(location_item.get_node("Path"), {
-							&"text": dir,
-							&"tooltip_text": dir,
-						})
-						_set_setting(section, key, dir)
+			match typeof(section_keys[key]):
+				TYPE_BOOL:
+					var button: CheckButton = CheckButton.new()
+					button.text = setting_name
+					button.button_pressed = Data.settings[section][key]
+					button.pressed.connect(func() -> void:
+						_set_setting(section, key, button.button_pressed)
 					)
-					_dialog_location.add_child(dialog)
-					
-					location_item.get_node("Label").text = " %s" % setting_name
-					Utils.set_node_properties(location_item.get_node("Path"), {
-						&"text": Data.settings[section][key],
-						&"tooltip_text": Data.settings[section][key],
-					})
-					location_item.get_node("Browse").pressed.connect(dialog.popup_centered)
-					add_child(location_item)
-				else:
-					pass
+					add_child(button)
+				TYPE_STRING:
+					if key.ends_with("location"):
+						var location_item: HBoxContainer = _location_item_scene.instantiate()
+						
+						var dialog: FileDialog = FileDialog.new()
+						dialog.name = "Select%s" % setting_name.replace(" ", "")
+						dialog.access = FileDialog.ACCESS_FILESYSTEM
+						dialog.file_mode = FileDialog.FILE_MODE_OPEN_DIR
+						dialog.title = "Select a New %s" % setting_name
+						dialog.size = Vector2i(480, 300)
+						dialog.dir_selected.connect(func(dir: String) -> void:
+							Utils.set_node_properties(location_item.get_node("Path"), {
+								&"text": dir,
+								&"tooltip_text": dir,
+							})
+							_set_setting(section, key, dir)
+						)
+						_dialog_location.add_child(dialog)
+						
+						location_item.get_node("Label").text = " %s" % setting_name
+						Utils.set_node_properties(location_item.get_node("Path"), {
+							&"text": Data.settings[section][key],
+							&"tooltip_text": Data.settings[section][key],
+						})
+						location_item.get_node("Browse").pressed.connect(dialog.popup_centered)
+						add_child(location_item)
 		
 		_created_sections += 1
 
