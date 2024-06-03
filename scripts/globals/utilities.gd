@@ -30,3 +30,16 @@ static func is_dict_key_valid(dict: Dictionary, key, type: Variant.Type) -> bool
 ## [param type]. Returns [param default] otherwise.
 static func get_dict_key(dict: Dictionary, key, type: Variant.Type, default = null) -> Variant:
 	return dict[key] if is_dict_key_valid(dict, key, type) else default
+
+
+## Returns the path to the directory the application binary is in.
+static func get_application_dir() -> String:
+	return ("%s/" % OS.get_executable_path().get_base_dir()) if not OS.has_feature("editor") else ProjectSettings.globalize_path("res://.godot/")
+
+
+## Returns [code]user://[/code]. If [code]Data.self_contained_mode[/code] is
+## [code]true[/code], returns the result of [method get_application_dir].
+static func get_userdata_path() -> String:
+	if not Data.self_contained_mode:
+		return "user://"
+	return get_application_dir()
