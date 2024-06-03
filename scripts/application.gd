@@ -41,7 +41,7 @@ func _ready() -> void:
 	
 	_ensure_output_structure()
 	
-	if not Data.settings_file_path.begins_with("user://"):
+	if Data.self_contained_mode:
 		Signals.print_to_console.emit(["Running in self-contained mode"], Constants.MessageType.NOTICE)
 	if Data.unknown_sections > 0:
 		Signals.print_to_console.emit(["%s unknown section(s) removed from settings" % Data.unknown_sections], Constants.MessageType.WARNING)
