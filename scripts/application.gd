@@ -43,10 +43,10 @@ func _ready() -> void:
 	
 	if not Data.settings_file_path.begins_with("user://"):
 		Signals.print_to_console.emit(["Running in self-contained mode"], Constants.MessageType.NOTICE)
-	if Data.removed_sections > 0:
-		Signals.print_to_console.emit(["%s unknown section(s) removed from settings" % Data.removed_sections], Constants.MessageType.WARNING)
-	if Data.removed_section_keys > 0:
-		Signals.print_to_console.emit(["%s unknown section key(s) removed from settings" % Data.removed_section_keys], Constants.MessageType.WARNING)
+	if Data.unknown_sections > 0:
+		Signals.print_to_console.emit(["%s unknown section(s) removed from settings" % Data.unknown_sections], Constants.MessageType.WARNING)
+	if Data.unknown_section_keys > 0:
+		Signals.print_to_console.emit(["%s unknown section key(s) removed from settings" % Data.unknown_section_keys], Constants.MessageType.WARNING)
 	if Data.invalid_section_keys > 0:
 		Signals.print_to_console.emit(["%s section key(s) of unexpected types found in settings" % Data.invalid_section_keys, "(invalid section keys are ignored, don't worry)"], Constants.MessageType.NOTICE)
 

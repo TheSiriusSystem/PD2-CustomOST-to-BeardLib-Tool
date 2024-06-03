@@ -9,8 +9,8 @@ const SELF_CONTAINED_FILE_NAMES: PackedStringArray = [
 
 var self_contained_mode: bool = false
 var settings: Dictionary = Constants.DEFAULT_SETTINGS.duplicate(true)
-var removed_sections: int = 0
-var removed_section_keys: int = 0
+var unknown_sections: int = 0
+var unknown_section_keys: int = 0
 var invalid_section_keys: int = 0
 
 var _config: ConfigFile = ConfigFile.new()
@@ -24,15 +24,13 @@ func _ready() -> void:
 			break
 	
 	_settings_path = _settings_path % Utils.get_userdata_path()
-	
 	for section in settings.keys():
 		var section_keys: Dictionary = settings[section]
 		for key in section_keys.keys():
 			if typeof(section_keys[key]) == TYPE_STRING and (section_keys[key].begins_with("res://") or section_keys[key].begins_with("user://")):
 				section_keys[key] = ProjectSettings.globalize_path(section_keys[key])
-	
 	if _config.load(_settings_path) == OK:
-		# Unknown sections/section keys are removed so the settings file looks neater.
+		# Unknown sections/section keys are removed so the settings file looks cleaner.
 		# Section keys with unexpected types are not loaded on startup.
 		for section in _config.get_sections():
 			if settings.has(section):
@@ -47,10 +45,10 @@ func _ready() -> void:
 							invalid_section_keys += 1
 					else:
 						_config.set_value(section, key, null)
-						removed_section_keys += 1
+						unknown_section_keys += 1
 			else:
 				_config.erase_section(section)
-				removed_sections += 1
+				unknown_sections += 1
 
 
 func _notification(what: int) -> void:
