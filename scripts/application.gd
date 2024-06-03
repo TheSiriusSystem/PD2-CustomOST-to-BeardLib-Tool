@@ -2,8 +2,8 @@ extends CanvasLayer
 ## Manages the application's main loop.
 
 
-const OUTPUT_SUBFOLDER_PATH_SOUNDS: String = "sounds"
-const OUTPUT_SUBFOLDER_PATH_LOCALIZATION: String = "loc"
+const OUTPUT_NESTED_PATH_SOUNDS: String = "sounds"
+const OUTPUT_NESTED_PATH_LOCALIZATION: String = "loc"
 const DEFAULT_TRACK_NAME: String = "My music name"
 const RECOGNIZED_TRACK_EXTENSIONS: PackedStringArray = [
 	"movie", # Natively supported by the Diesel engine.
@@ -52,8 +52,8 @@ func _ready() -> void:
 
 
 func _ensure_output_structure() -> void:
-	DirAccess.make_dir_recursive_absolute(_get_output_path(OUTPUT_SUBFOLDER_PATH_SOUNDS))
-	DirAccess.make_dir_recursive_absolute(_get_output_path(OUTPUT_SUBFOLDER_PATH_LOCALIZATION))
+	DirAccess.make_dir_recursive_absolute(_get_output_path(OUTPUT_NESTED_PATH_SOUNDS))
+	DirAccess.make_dir_recursive_absolute(_get_output_path(OUTPUT_NESTED_PATH_LOCALIZATION))
 
 
 func _clear_dir(dir_path: String) -> void:
@@ -128,7 +128,7 @@ func _on_track_definition_selected(path: String) -> void:
 		return
 	Signals.print_to_console.emit(["Converting %s parameters" % data.id], Constants.MessageType.NOTICE)
 	file.store_line("<table name=\"%s\">" % data.id)
-	file.store_line("	<Localization directory=\"%s\" default=\"en.txt\"/>" % OUTPUT_SUBFOLDER_PATH_LOCALIZATION)
+	file.store_line("	<Localization directory=\"%s\" default=\"en.txt\"/>" % OUTPUT_NESTED_PATH_LOCALIZATION)
 	file.store_line("	<HeistMusic id=\"%s\" directory=\"sounds\">" % data.id)
 	for cost_event_name in TRACK_EVENT_MAP.keys():
 		var bl_event_name: String = TRACK_EVENT_MAP[cost_event_name]
@@ -146,7 +146,7 @@ func _on_track_definition_selected(path: String) -> void:
 	file.store_line("	</HeistMusic>")
 	file.store_string("</table>")
 	
-	file = _open_file_for_writing("%s/en.txt" % OUTPUT_SUBFOLDER_PATH_LOCALIZATION)
+	file = _open_file_for_writing("%s/en.txt" % OUTPUT_NESTED_PATH_LOCALIZATION)
 	if not file:
 		return
 	Signals.print_to_console.emit(["Creating %s localization file" % data.id], Constants.MessageType.NOTICE)
