@@ -1,5 +1,4 @@
 extends CanvasLayer
-## Manages the application's main loop.
 
 
 const OUTPUT_NESTED_PATH_SOUNDS: String = "sounds"
