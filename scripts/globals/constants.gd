@@ -5,12 +5,12 @@ extends Object
 
 enum MessageType
 {
-	NOTICE,
-	WARNING,
-	ERROR,
+	NOTICE, ## Represents a plain message.
+	WARNING, ## Represents a cautionary message.
+	ERROR, ## Represents an error message.
 }
 
-const DEFAULT_SETTINGS: Dictionary = {
+const DEFAULT_SETTINGS: Dictionary = { ## Default user settings. Path settings set to special paths are converted to OS paths.
 	"application": {
 		"output_location": "user://output",
 		"open_output_on_convert": true,
