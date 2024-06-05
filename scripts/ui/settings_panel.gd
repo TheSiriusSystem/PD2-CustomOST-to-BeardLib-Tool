@@ -44,7 +44,7 @@ func _ready() -> void:
 						dialog.access = FileDialog.ACCESS_FILESYSTEM
 						dialog.file_mode = FileDialog.FILE_MODE_OPEN_DIR
 						dialog.title = "Select a New %s" % setting_name
-						dialog.size = Vector2i(480, 300)
+						dialog.size = Constants.FILE_DIALOG_SIZE
 						dialog.dir_selected.connect(func(dir: String) -> void:
 							Utils.set_node_properties(location_item.get_node("Path"), {
 								&"text": dir,
@@ -59,7 +59,7 @@ func _ready() -> void:
 							&"text": Data.settings[section][key],
 							&"tooltip_text": Data.settings[section][key],
 						})
-						location_item.get_node("Browse").pressed.connect(dialog.popup_centered)
+						location_item.get_node("Browse").pressed.connect(dialog.popup_centered.bind(Constants.FILE_DIALOG_SIZE))
 						add_child(location_item)
 		
 		created_sections += 1

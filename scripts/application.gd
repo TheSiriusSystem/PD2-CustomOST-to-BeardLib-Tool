@@ -46,6 +46,8 @@ func _ready() -> void:
 				push_error(final_message)
 	)
 	
+	$Buttons/ConvertTrack.pressed.connect($Dialogs/OpenTrackDefinition.popup_centered.bind(Constants.FILE_DIALOG_SIZE))
+	
 	_ensure_output_structure()
 	DirAccess.remove_absolute(_log_path)
 	

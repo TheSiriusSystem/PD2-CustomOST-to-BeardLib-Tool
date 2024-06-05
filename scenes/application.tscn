@@ -177,7 +177,7 @@ text = "Open Output Folder"
 
 [node name="OpenTrackDefinition" type="FileDialog" parent="Dialogs"]
 title = "Select a Track Definition"
-size = Vector2i(480, 300)
+size = Vector2i(540, 350)
 ok_button_text = "Open"
 mode_overrides_title = false
 file_mode = 0
@@ -202,6 +202,5 @@ grow_horizontal = 2
 grow_vertical = 2
 horizontal_alignment = 1
 
-[connection signal="pressed" from="Buttons/ConvertTrack" to="Dialogs/OpenTrackDefinition" method="popup_centered"]
 [connection signal="pressed" from="Buttons/OpenOutput" to="." method="_on_open_output_pressed"]
 [connection signal="file_selected" from="Dialogs/OpenTrackDefinition" to="." method="_on_track_definition_selected"]

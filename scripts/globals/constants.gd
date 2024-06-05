@@ -22,3 +22,15 @@ const DEFAULT_SETTINGS: Dictionary = {
 		"inherit_volume_params": false,
 	},
 }
+
+## ...
+## [codeblock]
+## var dialog: FileDialog = FileDialog.new()
+## dialog.size = Constants.FILE_DIALOG_SIZE
+## add_child(dialog)
+##
+## var button: Button = Button.new()
+## button.pressed.connect(dialog.popup_centered.bind(Constants.FILE_DIALOG_SIZE))
+## add_child(button)
+## [/codeblock]
+const FILE_DIALOG_SIZE: Vector2i = Vector2i(540, 350)
