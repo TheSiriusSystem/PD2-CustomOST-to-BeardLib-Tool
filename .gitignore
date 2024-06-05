@@ -14,26 +14,10 @@ export_presets.cfg
 data_*/
 mono_crash.*.json
 
-# Visual Studio 2015/2017 cache/options directory
-.vs/
-
-# Visual Studio 2017 auto generated files
-Generated\ Files/
-
 # Visual Studio Code
 .vscode/
 *.code-workspace
 .history/
-
-# Windows
-Thumbs.db
-Thumbs.db:encryptable
-ehthumbs.db
-ehthumbs_vista.db
-
-# Linux
-*~
-.directory
 
 # macOS
 .DS_Store
