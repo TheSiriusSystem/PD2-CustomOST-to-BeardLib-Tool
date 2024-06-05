@@ -10,7 +10,10 @@ enum MessageType
 	ERROR, ## Represents an error message.
 }
 
-const DEFAULT_SETTINGS: Dictionary = { ## Default user settings. Path settings set to special paths are converted to OS paths.
+## Default user settings. Any setting that is a string and ends with "location" is
+## a path setting; these are converted to OS paths if set to special paths (e.g.
+## [code]"userdata_location": "user://"[/code]).
+const DEFAULT_SETTINGS: Dictionary = {
 	"application": {
 		"output_location": "user://output",
 		"open_output_on_convert": true,

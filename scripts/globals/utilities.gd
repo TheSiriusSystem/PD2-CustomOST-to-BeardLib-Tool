@@ -37,8 +37,8 @@ static func get_application_dir() -> String:
 	return ("%s/" % OS.get_executable_path().get_base_dir()) if not OS.has_feature("editor") else ProjectSettings.globalize_path("res://.godot/")
 
 
-## Returns [code]user://[/code]. If [code]Data.self_contained_mode[/code] is
-## [code]true[/code], returns the result of [method get_application_dir].
+## Returns [code]user://[/code]. If self-contained mode is enabled, returns the
+## result of [method get_application_dir].
 static func get_userdata_path() -> String:
 	if not Data.self_contained_mode:
 		return "user://"
