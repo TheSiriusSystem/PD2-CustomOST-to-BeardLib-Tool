@@ -19,12 +19,12 @@ const UNREMOVABLE_FILE_NAMES: PackedStringArray = [
 	"..",
 ]
 
-var _log_file_path: String = "%slog.txt"
+var _log_path: String = "%slog.txt"
 
 
 func _ready() -> void:
-	_log_file_path = _log_file_path % Utils.get_userdata_path()
-	var log_file: FileAccess = FileAccess.open(_log_file_path, FileAccess.WRITE)
+	_log_path = _log_path % Utils.get_userdata_path()
+	var log_file: FileAccess = FileAccess.open(_log_path, FileAccess.WRITE)
 	
 	Signals.print_to_console.connect(func(messages: PackedStringArray, type: Constants.MessageType) -> void:
 		var final_message: String
@@ -47,7 +47,7 @@ func _ready() -> void:
 	)
 	
 	_ensure_output_structure()
-	DirAccess.remove_absolute(_log_file_path)
+	DirAccess.remove_absolute(_log_path)
 	
 	if Data.self_contained_mode:
 		Signals.print_to_console.emit(["Running in self-contained mode"], Constants.MessageType.NOTICE)
