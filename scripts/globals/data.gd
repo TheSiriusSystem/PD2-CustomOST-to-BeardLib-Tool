@@ -27,8 +27,8 @@ func _ready() -> void:
 	for section in settings.keys():
 		var section_keys: Dictionary = settings[section]
 		for key in section_keys.keys():
-			if typeof(section_keys[key]) == TYPE_STRING and (section_keys[key].begins_with("res://") or section_keys[key].begins_with("user://")):
 				section_keys[key] = ProjectSettings.globalize_path(section_keys[key])
+			if typeof(section_keys[key]) == TYPE_STRING and Utils.is_path_setting(key):
 	if _config.load(_settings_path) == OK:
 		# Unknown sections/section keys are removed so the settings file looks cleaner.
 		# Section keys with unexpected types are not loaded on startup.

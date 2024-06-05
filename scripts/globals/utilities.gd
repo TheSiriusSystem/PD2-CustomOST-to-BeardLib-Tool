@@ -43,3 +43,9 @@ static func get_userdata_path() -> String:
 	if not Data.self_contained_mode:
 		return "user://"
 	return get_application_dir()
+
+
+## Returns [code]true[/code] if [param key] ends with [code]location[/code]
+## (case-insensitive).
+static func is_path_setting(key: String) -> bool:
+	return key.to_lower().ends_with("location")

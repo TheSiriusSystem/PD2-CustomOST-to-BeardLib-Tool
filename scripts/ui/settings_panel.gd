@@ -36,7 +36,7 @@ func _ready() -> void:
 					)
 					add_child(button)
 				TYPE_STRING:
-					if key.ends_with("location"):
+					if Utils.is_path_setting(key):
 						var location_item: HBoxContainer = _location_item_scene.instantiate()
 						
 						var dialog: FileDialog = FileDialog.new()
