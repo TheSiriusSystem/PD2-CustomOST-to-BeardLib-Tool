@@ -27,8 +27,8 @@ func _ready() -> void:
 	for section in settings.keys():
 		var section_keys: Dictionary = settings[section]
 		for key in section_keys.keys():
-				section_keys[key] = ProjectSettings.globalize_path(section_keys[key])
 			if typeof(section_keys[key]) == TYPE_STRING and Utils.is_path_setting(key):
+				section_keys[key] = _finalize_path_setting(section_keys[key])
 	if _config.load(_settings_path) == OK:
 		# Unknown sections/section keys are removed so the settings file looks cleaner.
 		# Section keys with unexpected types are not loaded on startup.
@@ -37,9 +37,12 @@ func _ready() -> void:
 				var section_keys: Dictionary = settings[section]
 				for key in _config.get_section_keys(section):
 					if section_keys.has(key):
-						var value_type: Variant.Type = typeof(Constants.DEFAULT_SETTINGS[section][key]) as Variant.Type
+						var value_type: int = typeof(Constants.DEFAULT_SETTINGS[section][key])
 						var value = _config.get_value(section, key)
 						if typeof(value) == value_type:
+							if value_type == TYPE_STRING and Utils.is_path_setting(key):
+								value = _finalize_path_setting(value)
+							
 							section_keys[key] = value
 						else:
 							invalid_section_keys += 1
@@ -58,3 +61,9 @@ func _notification(what: int) -> void:
 			for key in section_keys.keys():
 				_config.set_value(section, key, section_keys[key])
 		_config.save(_settings_path)
+
+
+func _finalize_path_setting(value: String) -> String:
+	if value.begins_with("res://") or value.begins_with("user://"):
+		value = ProjectSettings.globalize_path(value)
+	return value.rstrip("/")
