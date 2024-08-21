@@ -1,4 +1,4 @@
-extends VBoxContainer
+extends PanelContainer
 ## A UI component for displaying messages in a vertical list.
 ##
 ## A UI component for displaying messages in a vertical list. The amount of
@@ -8,7 +8,8 @@ extends VBoxContainer
 
 var _current_messages: Array[Dictionary]
 
-@onready var _labels: Array[Node] = get_children()
+@onready var _container: VBoxContainer = $VBoxContainer
+@onready var _labels: Array[Node] = _container.get_children()
 
 
 func _ready() -> void:
