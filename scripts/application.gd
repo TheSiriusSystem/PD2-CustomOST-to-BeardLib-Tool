@@ -143,8 +143,8 @@ func _on_track_definition_selected(path: String) -> void:
 	for cost_event_name in TRACK_EVENT_MAP.keys():
 		var bl_event_name: String = TRACK_EVENT_MAP[cost_event_name]
 		var event_data: Dictionary = data.events[cost_event_name]
-		var line: String = "		<event name=\"%s\" source=\"%s\"" % [bl_event_name, event_data.file]
 		
+		var line: String = "		<event name=\"%s\" source=\"%s\"" % [bl_event_name, event_data.file]
 		line += _add_event_param_string(event_data, "start_file", "start_source", TYPE_STRING)
 		line += _add_event_param_string(event_data, "alt", "alt_source", TYPE_STRING)
 		line += _add_event_param_string(event_data, "alt_start", "alt_start_source", TYPE_STRING)
@@ -152,6 +152,7 @@ func _on_track_definition_selected(path: String) -> void:
 		if Data.settings.converter.inherit_volume_params:
 			line += _add_event_param_string(event_data, "volume", "volume", TYPE_FLOAT)
 		line += "/>"
+		
 		file.store_line(line)
 	file.store_line("	</HeistMusic>")
 	file.store_string("</table>")
