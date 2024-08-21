@@ -23,7 +23,7 @@ func _ready() -> void:
 			self_contained_mode = true
 			break
 	
-	_settings_path = _settings_path % Utils.get_userdata_path()
+	_settings_path %= Utils.get_userdata_path()
 	for section in settings.keys():
 		var section_keys: Dictionary = settings[section]
 		for key in section_keys.keys():

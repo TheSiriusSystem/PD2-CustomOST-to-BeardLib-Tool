@@ -6,4 +6,4 @@ extends Label
 
 
 func _ready() -> void:
-	text = text % ProjectSettings.get_setting("application/config/version", "x.x.x")
+	text %= ProjectSettings.get_setting("application/config/version", "x.x.x")
