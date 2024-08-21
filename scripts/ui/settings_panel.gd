@@ -1,4 +1,4 @@
-extends VBoxContainer
+extends PanelContainer
 ## A UI component for managing user settings.
 ##
 ## A UI component for managing user settings. Elements are created based on
@@ -8,6 +8,8 @@ extends VBoxContainer
 @export var _dialog_location: Node
 @export var _section_separator_scene: PackedScene
 @export var _location_item_scene: PackedScene
+
+@onready var _container: VBoxContainer = $VBoxContainer
 
 
 func _ready() -> void:
@@ -19,9 +21,9 @@ func _ready() -> void:
 		
 		var separator: VBoxContainer = _section_separator_scene.instantiate()
 		if created_sections == 0:
-			separator.get_node("HSeparatorTop").visible = false
-		separator.get_node("Label").text = section.capitalize()
-		add_child(separator)
+			separator.get_node(^"TopSeparator").visible = false
+		separator.get_node(^"Label").text = section.capitalize()
+		_container.add_child(separator)
 		
 		for key in section_keys.keys():
 			var setting_name: String = key.capitalize()
@@ -34,10 +36,11 @@ func _ready() -> void:
 					button.pressed.connect(func() -> void:
 						_set_setting(section, key, button.button_pressed)
 					)
-					add_child(button)
+					_container.add_child(button)
 				TYPE_STRING:
 					if Utils.is_path_setting(key):
 						var location_item: HBoxContainer = _location_item_scene.instantiate()
+						var path_edit: LineEdit = location_item.get_node(^"PathEdit")
 						
 						var dialog: FileDialog = FileDialog.new()
 						dialog.name = "Select%s" % setting_name.replace(" ", "")
@@ -46,7 +49,7 @@ func _ready() -> void:
 						dialog.title = "Select a New %s" % setting_name
 						dialog.size = Constants.FILE_DIALOG_SIZE
 						dialog.dir_selected.connect(func(dir: String) -> void:
-							Utils.set_node_properties(location_item.get_node("Path"), {
+							Utils.set_node_properties(path_edit, {
 								&"text": dir,
 								&"tooltip_text": dir,
 							})
@@ -54,13 +57,14 @@ func _ready() -> void:
 						)
 						_dialog_location.add_child(dialog)
 						
-						location_item.get_node("Label").text = " %s" % setting_name
-						Utils.set_node_properties(location_item.get_node("Path"), {
+						location_item.get_node(^"Label").text = " %s" % setting_name
+						Utils.set_node_properties(path_edit, {
 							&"text": Data.settings[section][key],
 							&"tooltip_text": Data.settings[section][key],
 						})
-						location_item.get_node("Browse").pressed.connect(dialog.popup_centered.bind(Constants.FILE_DIALOG_SIZE))
-						add_child(location_item)
+						
+						location_item.get_node(^"BrowseButton").pressed.connect(dialog.popup_centered.bind(Constants.FILE_DIALOG_SIZE))
+						_container.add_child(location_item)
 		
 		created_sections += 1
 
