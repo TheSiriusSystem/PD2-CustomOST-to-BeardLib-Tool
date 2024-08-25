@@ -7,7 +7,6 @@ extends AcceptDialog
 ## Signals.show_alert.emit("Hello World!", Constants.MessageType.NOTICE)
 ## [/codeblock]
 
-
 @onready var _label: Label = $Label
 
 

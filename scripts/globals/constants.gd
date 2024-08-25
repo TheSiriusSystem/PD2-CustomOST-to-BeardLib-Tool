@@ -2,7 +2,6 @@ class_name Constants
 extends Object
 ## Stores globally-accessible enums and constants.
 
-
 enum MessageType
 {
 	NOTICE, ## Represents a plain message.

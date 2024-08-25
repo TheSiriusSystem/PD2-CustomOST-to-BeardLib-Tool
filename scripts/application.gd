@@ -1,6 +1,5 @@
 extends CanvasLayer
 
-
 const OUTPUT_NESTED_PATH_SOUNDS: String = "sounds"
 const OUTPUT_NESTED_PATH_LOCALIZATION: String = "loc"
 const DEFAULT_TRACK_NAME: String = "My music name"

@@ -1,7 +1,6 @@
 extends Node
 ## Handles saving and loading user settings.
 
-
 const SELF_CONTAINED_FILE_NAMES: PackedStringArray = [
 	"._sc_",
 	"_sc_",

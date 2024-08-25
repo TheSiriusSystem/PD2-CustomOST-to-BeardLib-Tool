@@ -5,7 +5,6 @@ extends PanelContainer
 ## messages displayed is determined by how many children it has. Only [Label]s
 ## should be inserted into this control.
 
-
 var _current_messages: Array[Dictionary]
 
 @onready var _container: VBoxContainer = $VBoxContainer

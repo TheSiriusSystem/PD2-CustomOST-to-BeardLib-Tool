@@ -2,7 +2,6 @@ class_name Utils
 extends Object
 ## Stores globally-accessible functions.
 
-
 ## Assigns the given values to the given properties for [param node].
 ## [codeblock]
 ## var node = Node2D.new()
